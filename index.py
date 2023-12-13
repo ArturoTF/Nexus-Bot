@@ -1,12 +1,18 @@
 # index.py
+from discord.ext import commands  # Agrega esta línea
 from traductor.traductor import bot
 from eventos.eventos import programar_evento
 
+# Token de tu bot proporcionado por Discord Developer Portal
+BOT_TOKEN = 'MTEzNTkwNDg5NzIzODMwMjcyMA.GJvoq7.v5AjAsnHk2Hop9oXUvUoF2kOCecWxUn21mTqMo'
+
+@bot.command()
+async def programar(ctx, hora: int):
+    await programar_evento(bot, ctx, hora)
+
 @bot.event
 async def on_ready():
-    print(f'Bot listo!!!')
-    await programar_evento(bot, channel_id=Tu_ID_de_Canal, hora=3600)  # 3600 segundos = 1 hora
-
+    print(f'Bot listo como {bot.user.name}')
 
 @bot.event
 async def on_command_error(ctx, error):
@@ -14,6 +20,4 @@ async def on_command_error(ctx, error):
         pass
     # Puedes agregar más manejo de errores según sea necesario
 
-# Token de tu bot proporcionado por Discord Developer Portal
-BOT_TOKEN = 'MTEzNTkwNDg5NzIzODMwMjcyMA.Gg-DXn.s_OpKtFzO0wIrMOvR5AqLT_tSh0BArqDIlj6Nk'
 bot.run(BOT_TOKEN)
