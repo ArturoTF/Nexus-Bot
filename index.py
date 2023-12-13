@@ -49,7 +49,7 @@ async def programar(ctx, nombre_evento, tiempo_finalizacion: int):
         await ctx.send("Canal no encontrado o no es un canal de texto válido.")
         return
     
-    # Llama a la función actualizada de programar_evento con la ID del canal y el nombre del evento
+    # Llama a la función actualizada de programar_evento con la ID del canal, el tiempo y el nombre del evento
     await programar_evento(bot, canal_id_eventos, tiempo_finalizacion, nombre_evento)
 
 @bot.event
