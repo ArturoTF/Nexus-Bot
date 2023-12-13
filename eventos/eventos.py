@@ -6,7 +6,7 @@ from traductor.traductor import bot
 personas_apuntadas = []
 personas_ausentadas = []
 
-async def programar_evento(bot, channel_id, tiempo_finalizacion, nombre_evento):
+async def programar_evento(channel_id, tiempo_finalizacion, nombre_evento):
     channel = bot.get_channel(channel_id)
 
     if not channel:
@@ -50,4 +50,3 @@ async def on_reaction_remove(reaction, user):
         personas_apuntadas.remove(user.name)
     elif str(reaction.emoji) == '🟥' and user.name in personas_ausentadas:
         personas_ausentadas.remove(user.name)
-
