@@ -4,7 +4,7 @@ from traductor.traductor import bot
 from eventos.eventos import programar_evento
 
 # Token de tu bot proporcionado por Discord Developer Portal
-BOT_TOKEN = 'MTEzNTkwNDg5NzIzODMwMjcyMA.GJvoq7.v5AjAsnHk2Hop9oXUvUoF2kOCecWxUn21mTqMo'
+BOT_TOKEN = 'MTEzNTkwNDg5NzIzODMwMjcyMA.Gw0cpn.bSMuYM6cwhAjmd7TQ9p4K8XmBPWD80goDO78Mk'
 
 @bot.command()
 async def programar(ctx, hora: int):
