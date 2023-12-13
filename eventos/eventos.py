@@ -6,7 +6,15 @@ from traductor.traductor import bot
 personas_apuntadas = []
 personas_ausentadas = []
 
-async def programar_evento(channel_id, tiempo_finalizacion, nombre_evento):
+# eventos.py
+from discord.ext import commands
+from traductor.traductor import bot
+
+# Listas para rastrear a las personas apuntadas y ausentadas
+personas_apuntadas = []
+personas_ausentadas = []
+
+async def programar_evento(bot, channel_id, tiempo_finalizacion, nombre_evento):
     channel = bot.get_channel(channel_id)
 
     if not channel:
