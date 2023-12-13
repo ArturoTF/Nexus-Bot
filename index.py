@@ -2,7 +2,7 @@
 import discord
 from discord.ext import commands  # Agrega esta línea
 from traductor.traductor import bot
-# from eventos.eventos import programar_evento
+from eventos.eventos import programar_evento
 
 intents = discord.Intents.default()
 intents.messages = True
