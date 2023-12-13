@@ -41,3 +41,13 @@ async def programar_evento(bot, channel_id, tiempo_finalizacion, nombre_evento):
     except asyncio.TimeoutError:
         print("El tiempo para reaccionar ha expirado.")
 
+@bot.event
+async def on_reaction_remove(reaction, user):
+    global personas_apuntadas, personas_ausentadas
+    if user.bot or reaction.message.author.bot:
+        return
+
+    if str(reaction.emoji) == '🟩' and user.name in personas_apuntadas:
+        personas_apuntadas.remove(user.name)
+    elif str(reaction.emoji) == '🟥' and user.name in personas_ausentadas:
+        personas_ausentadas.remove(user.name)
