@@ -12,17 +12,22 @@ canal_id_eventos = None
 @bot.command()
 async def configurarCanalEventos(ctx, idChannel):
     global canal_id_eventos
-    # Obtener la ID del canal desde la mención
-    canal_id_eventos = int(idChannel[2:-1])  # Ignorar los primeros 2 caracteres ("<#") y el último (">")
-    
-    # Obtener el objeto TextChannel usando la ID del canal
-    channel = bot.get_channel(canal_id_eventos)
-    
-    if channel and isinstance(channel, discord.TextChannel):
-        print(f'Canal de eventos configurado en {channel.name}. ID: {canal_id_eventos}')
-        await ctx.send(f"Canal de eventos configurado en {channel.name}. ID: {canal_id_eventos}")
-    else:
-        await ctx.send("Canal no encontrado o no es un canal de texto válido.")
+    try:
+        # Obtener la ID del canal desde la mención
+        canal_id_eventos = int(idChannel[2:-1])  # Ignorar los primeros 2 caracteres ("<#") y el último (">")
+
+        # Obtener el objeto TextChannel usando la ID del canal
+        channel = bot.get_channel(canal_id_eventos)
+
+        if channel and isinstance(channel, discord.TextChannel):
+            print(f'Canal de eventos configurado en {channel.name}. ID: {canal_id_eventos}')
+            await ctx.send(f"Canal de eventos configurado en {channel.name}. ID: {canal_id_eventos}")
+        else:
+            await ctx.send("Canal no encontrado o no es un canal de texto válido.")
+    except Exception as e:
+        print(f"Error durante la configuración del canal de eventos: {e}")
+        await ctx.send("Hubo un error durante la configuración del canal de eventos.")
+
 
 @bot.command()
 async def programar(ctx, nombre_evento, tiempo_finalizacion: int):
