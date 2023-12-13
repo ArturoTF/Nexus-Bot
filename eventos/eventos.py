@@ -1,7 +1,5 @@
 # eventos.py
-import discord
 from discord.ext import commands
-import asyncio
 
 # Listas para rastrear a las personas apuntadas y ausentadas
 personas_apuntadas = []
