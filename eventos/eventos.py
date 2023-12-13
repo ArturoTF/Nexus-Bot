@@ -1,5 +1,6 @@
 # eventos.py
 from discord.ext import commands
+from traductor.traductor import bot
 
 # Listas para rastrear a las personas apuntadas y ausentadas
 personas_apuntadas = []
