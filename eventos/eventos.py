@@ -3,8 +3,9 @@ import discord
 from discord.ext import commands
 import asyncio
 
-# Lista para rastrear a las personas que se han apuntado al evento
+# Listas para rastrear a las personas apuntadas y ausentadas
 personas_apuntadas = []
+personas_ausentadas = []
 
 async def programar_evento(bot, channel_id, tiempo_finalizacion, nombre_evento):
     channel = bot.get_channel(channel_id)
@@ -28,10 +29,15 @@ async def programar_evento(bot, channel_id, tiempo_finalizacion, nombre_evento):
         if str(reaction.emoji) == '🟩':
             print(f"{user.name} se ha apuntado al evento.")
             personas_apuntadas.append(user.name)
-            await mensaje.edit(content=f"{nombre_evento} - Reacciona con :green_square: para apuntarte o :red_square: para ausentarte.\nPersonas apuntadas: {', '.join(personas_apuntadas)}")
+            if user.name in personas_ausentadas:
+                personas_ausentadas.remove(user.name)
+            await mensaje.edit(content=f"{nombre_evento} - Reacciona con :green_square: para apuntarte o :red_square: para ausentarte.\nPersonas apuntadas: {', '.join(personas_apuntadas)}\nPersonas ausentadas: {', '.join(personas_ausentadas)}")
         elif str(reaction.emoji) == '🟥':
             print(f"{user.name} no se ha apuntado al evento.")
-            await mensaje.edit(content=f"{nombre_evento} - Reacciona con :green_square: para apuntarte o :red_square: para ausentarte.\nPersonas apuntadas: {', '.join(personas_apuntadas)}")
+            personas_ausentadas.append(user.name)
+            if user.name in personas_apuntadas:
+                personas_apuntadas.remove(user.name)
+            await mensaje.edit(content=f"{nombre_evento} - Reacciona con :green_square: para apuntarte o :red_square: para ausentarte.\nPersonas apuntadas: {', '.join(personas_apuntadas)}\nPersonas ausentadas: {', '.join(personas_ausentadas)}")
     except asyncio.TimeoutError:
         print("El tiempo para reaccionar ha expirado.")
 
