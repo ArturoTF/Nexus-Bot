@@ -51,3 +51,4 @@ async def on_reaction_remove(reaction, user):
         personas_apuntadas.remove(user.name)
     elif str(reaction.emoji) == '🟥' and user.name in personas_ausentadas:
         personas_ausentadas.remove(user.name)
+
