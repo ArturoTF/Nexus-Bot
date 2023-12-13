@@ -1,7 +1,10 @@
 # index.py
 from discord.ext import commands  # Agrega esta línea
 from traductor.traductor import bot
-# from eventos.eventos import programar_evento     
+# from eventos.eventos import programar_evento
+
+intents = discord.Intents.default()
+intents.messages = True
 
 # Token de tu bot proporcionado por Discord Developer Portal
 BOT_TOKEN = 'MTEzNTkwNDg5NzIzODMwMjcyMA.Gw0cpn.bSMuYM6cwhAjmd7TQ9p4K8XmBPWD80goDO78Mk'
@@ -13,17 +16,21 @@ canal_id_eventos = None
 async def configurarCanalEventos(ctx, idChannel):
     global canal_id_eventos
     try:
-        # Obtener la ID del canal desde la mención
-        canal_id_eventos = int(idChannel[2:-1])  # Ignorar los primeros 2 caracteres ("<#") y el último (">")
+        # Verificar si la entrada es una mención de canal válida
+        if idChannel.startswith("<#") and idChannel.endswith(">"):
+            # Obtener la ID del canal desde la mención
+            canal_id_eventos = int(idChannel[2:-1])  # Ignorar los primeros 2 caracteres ("<#") y el último (">")
 
-        # Obtener el objeto TextChannel usando la ID del canal
-        channel = bot.get_channel(canal_id_eventos)
+            # Obtener el objeto TextChannel usando la ID del canal
+            channel = bot.get_channel(canal_id_eventos)
 
-        if channel and isinstance(channel, discord.TextChannel):
-            print(f'Canal de eventos configurado en {channel.name}. ID: {canal_id_eventos}')
-            await ctx.send(f"Canal de eventos configurado en {channel.name}. ID: {canal_id_eventos}")
+            if channel and isinstance(channel, discord.TextChannel):
+                print(f'Canal de eventos configurado en {channel.name}. ID: {canal_id_eventos}')
+                await ctx.send(f"Canal de eventos configurado en {channel.name}. ID: {canal_id_eventos}")
+            else:
+                await ctx.send("Canal no encontrado o no es un canal de texto válido.")
         else:
-            await ctx.send("Canal no encontrado o no es un canal de texto válido.")
+            await ctx.send("Por favor, proporciona una mención de canal válida.")
     except Exception as e:
         print(f"Error durante la configuración del canal de eventos: {e}")
         await ctx.send("Hubo un error durante la configuración del canal de eventos.")
