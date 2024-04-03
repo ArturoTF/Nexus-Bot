@@ -2,11 +2,11 @@ from discord.ext import commands
 from discord.commands import slash_command  # Importa el decorador para comandos slash
 
 def register_commands(bot):
-    @bot.slash_command(name="ceo", description="Muestra quién es el CEO")
+    @bot.slash_command(name="Ceo", description="Muestra quién es el CEO")
     async def ceo(ctx):
-        await ctx.respond("El CEO es ArturoTF")
+        await ctx.respond("The CEO of this project is ArturoTF")
 
-    @bot.slash_command(name="languages", description="Muestra los idiomas disponibles para traducción")
+    @bot.slash_command(name="Languages", description="Muestra los idiomas disponibles para traducción")
     async def languages(ctx):
         languages = "🇬🇧, 🇪🇸, 🇩🇪, 🇷🇺, 🇵🇹, 🇻🇳, 🇨🇳, 🇮🇹, 🇺🇸, 🇵🇱"
-        await ctx.respond(f"Idiomas disponibles para traducción: {languages}")
+        await ctx.respond(f"Languages ​​available for translation: {languages}")
