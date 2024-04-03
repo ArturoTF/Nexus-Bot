@@ -8,5 +8,5 @@ def register_commands(bot):
 
     @bot.slash_command(name="Languages", description="Muestra los idiomas disponibles para traducción")
     async def languages(ctx):
-        languages = "🇬🇧, 🇪🇸, 🇩🇪, 🇷🇺, 🇵🇹, 🇻🇳, 🇨🇳, 🇮🇹, 🇺🇸, 🇵🇱"
+        languages = "🇬🇧, 🇪🇸, 🇩🇪, 🇷🇺, 🇵🇹, 🇻🇳, 🇨🇳, 🇮🇹, 🇺🇸, 🇵🇱,🇺🇸,🇷🇸,🇯🇵"
         await ctx.respond(f"Languages ​​available for translation: {languages}")
