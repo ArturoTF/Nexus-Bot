@@ -1,12 +1,12 @@
-# traductor.py
 import discord
-from discord.ext import commands
+from discord.ext import commands  # No cambia, py-cord usa el mismo espacio de nombres
 from googletrans import Translator
 
 intents = discord.Intents.all()
 intents.reactions = True
 
-bot = commands.Bot(command_prefix='!', intents=intents)
+# La inicialización del bot permanece igual en py-cord
+bot = commands.Bot(command_prefix='/', intents=intents)
 translator = Translator()
 
 @bot.event
