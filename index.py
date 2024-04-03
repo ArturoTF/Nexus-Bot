@@ -1,11 +1,11 @@
 # index.py
 import discord
 import os
-from discord.ext import commands  # Agrega esta línea
 from traductor.traductor import bot
-from commands import commands
+from bot_commands import commands as bot_commands_module
 from discord_slash import SlashCommand  # Esto ahora viene de una extensión compatible
-import commands.commands as commands_module
+from discord.ext import commands
+import bot_commands.commands as bot_commands_module
 
 intents = discord.Intents.default()
 intents.messages = True
