@@ -1,20 +1,12 @@
-from discord_slash.utils.manage_commands import create_option, create_choice
+from discord.ext import commands
+from discord.commands import slash_command  # Importa el decorador para comandos slash
 
-def register_commands(slash):
-    @slash.slash(
-        name="ceo",
-        description="Muestra quién es el CEO",
-        options=[]
-    )
+def register_commands(bot):
+    @bot.slash_command(name="ceo", description="Muestra quién es el CEO")
     async def ceo(ctx):
-        await ctx.send("El CEO es ArturoTF")
+        await ctx.respond("El CEO es ArturoTF")
 
-    @slash.slash(
-        name="languages",
-        description="Muestra los idiomas disponibles para traducción",
-        options=[]
-    )
+    @bot.slash_command(name="languages", description="Muestra los idiomas disponibles para traducción")
     async def languages(ctx):
         languages = "🇬🇧, 🇪🇸, 🇩🇪, 🇷🇺, 🇵🇹, 🇻🇳, 🇨🇳, 🇮🇹, 🇺🇸, 🇵🇱"
-        await ctx.send(f"Idiomas disponibles para traducción: {languages}")
-
+        await ctx.respond(f"Idiomas disponibles para traducción: {languages}")
