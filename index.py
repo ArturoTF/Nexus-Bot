@@ -3,6 +3,7 @@ import discord
 import os
 from discord.ext import commands  # Agrega esta línea
 from traductor.traductor import bot
+from commands import commands
 
 intents = discord.Intents.default()
 intents.messages = True
