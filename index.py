@@ -1,19 +1,19 @@
 # index.py
 import discord
 import os
-from traductor.traductor import bot
-from bot_commands import commands as bot_commands_module
+from traductor.traductor import bot  # Asume que este es el bot ya inicializado
 from discord_slash import SlashCommand  # Esto ahora viene de una extensión compatible
-from discord.ext import commands
-import bot_commands.commands as bot_commands_module
+from bot_commands.commands import register_commands  # Asume que has renombrado tu módulo a bot_commands y tiene una función register_commands
 
 intents = discord.Intents.default()
 intents.messages = True
 bot = commands.Bot(command_prefix="/", intents=intents)
 
+# Inicializa el soporte de comandos slash
 slash = SlashCommand(bot, sync_commands=True)
 
-commands_module.register_commands(slash)
+# Registra tus comandos slash utilizando la función que los registra
+register_commands(slash)
 
 # Variable global para almacenar la ID del canal
 canal_id_eventos = None
