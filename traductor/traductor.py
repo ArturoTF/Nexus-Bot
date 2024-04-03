@@ -9,18 +9,6 @@ intents.reactions = True
 bot = commands.Bot(command_prefix='!', intents=intents)
 translator = Translator()
 
-
-@bot.command()
-async def language(ctx):
-    await ctx.send(
-        "Languages available for translation: 🇬🇧,🇪🇸,🇩🇪,🇷🇺,🇵🇹,🇻🇳,🇨🇳,🇮🇹,🇺🇸,🇵🇱")
-
-
-@bot.command()
-async def ceo(ctx):
-    await ctx.send("Made by ArturoTF")
-
-
 @bot.event
 async def on_reaction_add(reaction, user):
     if user.bot:
