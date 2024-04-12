@@ -1,11 +1,10 @@
 from discord.ext import commands
-from discord.commands import slash_command, Option  # Importa Option para las opciones del comando slash
-from discord import ApplicationCommandOptionType
+from discord.commands import slash_command  # Importa Option para las opciones del comando slash
+from discord.app_commands import Option, OptionChoice
 import discord
 
-
-# Aquí agregarías las importaciones de tus funciones de conexión a la base de datos
-from ...enviroments.connection import create_connection, close_connection
+# Importaciones de tus funciones de conexión a la base de datos
+from ...environments.connection import create_connection, close_connection
 
 def register_commands(bot):
     @bot.slash_command(name="ceo", description="Muestra quién es el CEO")
@@ -14,8 +13,8 @@ def register_commands(bot):
 
     @bot.slash_command(name="languages", description="Muestra los idiomas disponibles para traducción")
     async def languages(ctx):
-        languages = "🇬🇧, 🇪🇸, 🇩🇪, 🇷🇺, 🇵🇹, 🇻🇳, 🇨🇳, 🇮🇹, 🇺🇸, 🇵🇱,🇺🇸,🇷🇸,🇯🇵"
-        await ctx.respond(f"Languages ​​available for translation: {languages}")
+        language_list = "🇬🇧, 🇪🇸, 🇩🇪, 🇷🇺, 🇵🇹, 🇻🇳, 🇨🇳, 🇮🇹, 🇺🇸, 🇵🇱,🇺🇸,🇷🇸,🇯🇵"
+        await ctx.respond(f"Languages available for translation: {language_list}")
 
     # Diccionario de opciones de idiomas y sus banderas
     language_options = {
@@ -36,22 +35,20 @@ def register_commands(bot):
 
 
     @bot.slash_command(name="language", description="Select your language")
-    async def language(ctx, idioma: discord.Option(str, "Elige tu idioma", choices=language_options)):
+    async def language(ctx, idioma: discord.Option(str, "Elige tu idioma", choices=[OptionChoice(name=f"{name} {flag}", value=name) for name, flag in language_options.items()])):
         # Aquí se maneja el comando y se guarda en la base de datos
-        user_id = ctx.author.id
         user_name = ctx.author.name
-        language_flag = idioma
-        language_name = [lang for lang, flag in language_options.items() if flag == idioma][0]
 
         # Conecta a la base de datos y guarda la selección del idioma
         connection = create_connection()
         cursor = connection.cursor()
         cursor.execute(
             "INSERT INTO usuarios_idioma (name, idioma) VALUES (%s, %s) ON DUPLICATE KEY UPDATE idioma = %s",
-            (user_name, language_name, language_name)
+            (user_name, idioma, idioma)
         )
         connection.commit()
         close_connection(connection)
 
         # Envía una respuesta al usuario con la bandera del idioma seleccionado
-        await ctx.respond(f"{ctx.author.mention}, tu idioma se ha establecido a {language_flag}")
+        await ctx.respond(f"{ctx.author.mention}, tu idioma se ha establecido a {language_options[idioma]}")
+
