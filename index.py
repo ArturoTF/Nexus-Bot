@@ -1,22 +1,20 @@
-# index.py
 import discord
 import os
+<<<<<<< HEAD
 from traductor.traductor import bot  # Asume que este es el bot ya inicializado
 from discord_slash import SlashCommand  # Esto ahora viene de una extensión compatible
 from bot_commands.BasicCommands import register_commands  # Asume que has renombrado tu módulo a bot_commands y tiene una función register_commands
+=======
+from discord.ext import commands
+from traductor.traductor import bot  # Asegúrate de que esta importación se hace correctamente
+from bot_commands.commands import register_commands  # Función ajustada para py-cord
+>>>>>>> cbbb5e75dd27928c7f79ef20864d85f8e09e62a0
 
-intents = discord.Intents.default()
-intents.messages = True
-bot = commands.Bot(command_prefix="/", intents=intents)
+# No es necesario inicializar 'bot' de nuevo si ya lo has hecho en traductor.traductor
+# Sólo asegúrate de que 'intents' estén correctamente configurados allí
 
-# Inicializa el soporte de comandos slash
-slash = SlashCommand(bot, sync_commands=True)
-
-# Registra tus comandos slash utilizando la función que los registra
-register_commands(slash)
-
-# Variable global para almacenar la ID del canal
-canal_id_eventos = None
+# Registra tus comandos slash utilizando la función adaptada a py-cord
+register_commands(bot)
 
 @bot.event
 async def on_ready():
@@ -25,7 +23,7 @@ async def on_ready():
 @bot.event
 async def on_command_error(ctx, error):
     if isinstance(error, commands.CommandNotFound):
-        pass
-    # Puedes agregar más manejo de errores según sea necesario
+        pass  # Maneja los errores según sea necesario
+
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 bot.run(BOT_TOKEN)
