@@ -1,6 +1,8 @@
 from discord.ext import commands
 from discord.commands import slash_command, Option  # Importa Option para las opciones del comando slash
+from discord import ApplicationCommandOptionType
 import discord
+
 
 # Aquí agregarías las importaciones de tus funciones de conexión a la base de datos
 from ...enviroments.connection import create_connection, close_connection
@@ -33,19 +35,8 @@ def register_commands(bot):
     }
 
 
-    @bot.slash_command(
-        name="language",
-        description="Select your language",
-        options=[
-            Option(
-                name="idioma",
-                description="Elige tu idioma",
-                required=True,
-                choices=[discord.OptionChoice(name=lang, value=flag) for lang, flag in language_options.items()],
-            ),
-        ]
-    )
-    async def language(ctx, idioma: str):
+    @bot.slash_command(name="language", description="Select your language")
+    async def language(ctx, idioma: discord.Option(str, "Elige tu idioma", choices=language_options)):
         # Aquí se maneja el comando y se guarda en la base de datos
         user_id = ctx.author.id
         user_name = ctx.author.name
@@ -56,10 +47,9 @@ def register_commands(bot):
         connection = create_connection()
         cursor = connection.cursor()
         cursor.execute(
-            "INSERT INTO usuarios_idioma (name, idioma) VALUES (%s, %s) ON DUPLICATE KEY UPDATE idioma = %s", 
+            "INSERT INTO usuarios_idioma (name, idioma) VALUES (%s, %s) ON DUPLICATE KEY UPDATE idioma = %s",
             (user_name, language_name, language_name)
-        )   
-
+        )
         connection.commit()
         close_connection(connection)
 
