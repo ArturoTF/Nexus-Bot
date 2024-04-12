@@ -13,5 +13,6 @@ setup(
         "googletrans==4.0.0-rc1",
         "google-cloud-translate==1.3.1",
         "google-cloud-texttospeech==0.2.0",
+        "mysql-connector-python",
     ],
 )
