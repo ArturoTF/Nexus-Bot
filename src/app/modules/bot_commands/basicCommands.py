@@ -30,7 +30,7 @@ def register_commands(bot):
     'American English': '🇺🇸',
     'Serbian': '🇷🇸',
     'Japanese': '🇯🇵',
-}
+    }
 
 
     @bot.slash_command(
