@@ -33,7 +33,7 @@ def register_commands(bot):
 
 
     @bot.slash_command(name="language", description="Select your language")
-    async def language(ctx, idioma: discord.Option(str, "Elige tu idioma", choices=[OptionChoice(name=f"{name} {flag}", value=name) for name, flag in language_options.items()])):
+    async def Setlanguage(ctx, idioma: discord.Option(str, "Elige tu idioma", choices=[OptionChoice(name=f"{name} {flag}", value=name) for name, flag in language_options.items()])):
         # Aquí se maneja el comando y se guarda en la base de datos
         user_name = ctx.author.name
 
