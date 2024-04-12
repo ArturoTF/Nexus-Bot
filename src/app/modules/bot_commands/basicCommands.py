@@ -1,8 +1,6 @@
 from discord.ext import commands
-from discord.commands import slash_command  # Importa Option para las opciones del comando slash
-from discord.app_commands import Option, OptionChoice
+from discord.commands import slash_command, Option, OptionChoice  # Importaciones necesarias para los comandos slash
 import discord
-
 # Importaciones de tus funciones de conexión a la base de datos
 from ...environments.connection import create_connection, close_connection
 
