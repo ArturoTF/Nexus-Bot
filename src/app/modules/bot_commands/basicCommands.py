@@ -3,7 +3,7 @@ from discord.commands import slash_command, Option  # Importa Option para las op
 import discord
 
 # Aquí agregarías las importaciones de tus funciones de conexión a la base de datos
-from app.environments.connection import create_connection, close_connection
+from ..environments.connection import create_connection, close_connection
 
 def register_commands(bot):
     @bot.slash_command(name="ceo", description="Muestra quién es el CEO")
