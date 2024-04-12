@@ -1,10 +1,9 @@
 import discord
 import os
-from traductor.traductor import bot  # Asume que este es el bot ya inicializado
+from src.app.modules.traductor.traductor import bot  # Asume que este es el bot ya inicializado
 from discord import SlashCommand  # Esto ahora viene de una extensión compatible
-from bot_commands.basicCommands import register_commands  # Asume que has renombrado tu módulo a bot_commands y tiene una función register_commands
+from src.app.modules.bot_commands.basicCommands import register_commands  # Asume que has renombrado tu módulo a bot_commands y tiene una función register_commands
 from discord.ext import commands
-from traductor.traductor import bot  # Asegúrate de que esta importación se hace correctamente
 
 # No es necesario inicializar 'bot' de nuevo si ya lo has hecho en traductor.traductor
 # Sólo asegúrate de que 'intents' estén correctamente configurados allí
