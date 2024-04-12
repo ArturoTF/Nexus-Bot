@@ -5,7 +5,6 @@ from discord import SlashCommand  # Esto ahora viene de una extensión compatibl
 from bot_commands.basicCommands import register_commands  # Asume que has renombrado tu módulo a bot_commands y tiene una función register_commands
 from discord.ext import commands
 from traductor.traductor import bot  # Asegúrate de que esta importación se hace correctamente
-from bot_commands.commands import register_commands  # Función ajustada para py-cord
 
 # No es necesario inicializar 'bot' de nuevo si ya lo has hecho en traductor.traductor
 # Sólo asegúrate de que 'intents' estén correctamente configurados allí
