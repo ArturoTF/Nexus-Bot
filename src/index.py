@@ -18,7 +18,8 @@ async def on_ready():
 @bot.event
 async def on_command_error(ctx, error):
     if isinstance(error, commands.CommandNotFound):
-        pass  # Maneja los errores según sea necesario
+        pass  # Aquí puedes manejar errores específicos o personalizados según necesites
+
 
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 bot.run(BOT_TOKEN)
