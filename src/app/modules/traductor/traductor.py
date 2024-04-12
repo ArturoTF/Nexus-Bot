@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands  # No cambia, py-cord usa el mismo espacio de nombres
 from googletrans import Translator
-from ...environments.logging import safe_log  
+from ...environments.logging import safe_log
 
 intents = discord.Intents.all()
 intents.reactions = True
