@@ -14,12 +14,13 @@ register_commands(bot)
 @bot.event
 async def on_ready():
     print(f'Bot listo como {bot.user.name}')
-    await bot.sync_commands()
-
 @bot.event
 async def on_command_error(ctx, error):
     if isinstance(error, commands.CommandNotFound):
-        pass  # Aquí puedes manejar errores específicos o personalizados según necesites
+        safe_log("WARNING", f"Comando no encontrado: {ctx.invoked_with}", "on_command_error")
+    else:
+        safe_log("ERROR", f"Error inesperado en comando: {str(error)}", "on_command_error")
+
 
 
 BOT_TOKEN = os.getenv("BOT_TOKEN")
