@@ -14,6 +14,7 @@ register_commands(bot)
 @bot.event
 async def on_ready():
     print(f'Bot listo como {bot.user.name}')
+    await bot.sync_commands()
 
 @bot.event
 async def on_command_error(ctx, error):
