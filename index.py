@@ -3,7 +3,7 @@ import discord
 import os
 from traductor.traductor import bot  # Asume que este es el bot ya inicializado
 from discord_slash import SlashCommand  # Esto ahora viene de una extensión compatible
-from bot_commands.commands import register_commands  # Asume que has renombrado tu módulo a bot_commands y tiene una función register_commands
+from bot_commands.BasicCommands import register_commands  # Asume que has renombrado tu módulo a bot_commands y tiene una función register_commands
 
 intents = discord.Intents.default()
 intents.messages = True
