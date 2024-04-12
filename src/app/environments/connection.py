@@ -1,8 +1,6 @@
 import os
 import mysql.connector
 from mysql.connector import Error
-from .logging import safe_log
-
 
 # Función para crear una conexión a la base de datos
 def create_connection():
@@ -16,17 +14,17 @@ def create_connection():
         )
         if connection.is_connected():
             db_info = connection.get_server_info()
-            safe_log("INFO", f"Conectado a MySQL Server versión {db_info}", "create_connection")
+            print(f"Conectado a MySQL Server versión {db_info}")
             return connection
     except Error as e:
-        safe_log("ERROR", f"Error al conectar a MySQL: {e}", "create_connection")
+        print(f"Error al conectar a MySQL: {e}")
         return None
 
 # Función para cerrar la conexión
 def close_connection(connection):
     try:
-        if connection.is_connected():
+        if connection and connection.is_connected():
             connection.close()
-            safe_log("INFO", "Conexión a MySQL cerrada correctamente", "close_connection")
+            print("Conexión a MySQL cerrada")
     except Error as e:
-        safe_log("ERROR", f"Error al cerrar la conexión MySQL: {e}", "close_connection")
+        print(f"Error al cerrar la conexión MySQL: {e}")
