@@ -1,6 +1,7 @@
 import discord
-from discord.ext import commands  # No cambia, py-cord usa el mismo espacio de nombres
+from discord.ext import commands
 from googletrans import Translator
+from ...environments.utils import emoji_flags  # Importar desde utils
 from ...environments.connection import create_connection, close_connection
 from ...environments.logging import safe_log
 
@@ -14,22 +15,6 @@ translator = Translator()
 async def on_reaction_add(reaction, user):
     if user.bot:
         return
-
-    emoji_flags = {
-        '🇬🇧': 'en',
-        '🇪🇸': 'es',
-        '🇩🇪': 'de',
-        '🇷🇺': 'ru',
-        '🇵🇹': 'pt',
-        '🇻🇳': 'vi',
-        '🇨🇳': 'zh-cn',
-        '🇮🇹': 'it',
-        '🇫🇷': 'fr',
-        '🇵🇱': 'pl',
-        '🇺🇸': 'en',
-        '🇷🇸': 'sr',
-        '🇯🇵': 'ja',
-    }
 
     lang_code = emoji_flags.get(str(reaction.emoji))
 

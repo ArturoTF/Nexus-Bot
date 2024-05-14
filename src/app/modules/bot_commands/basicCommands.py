@@ -1,7 +1,7 @@
 from discord.ext import commands
-from discord.commands import slash_command, Option, OptionChoice  # Importaciones necesarias para los comandos slash
+from discord.commands import slash_command, Option, OptionChoice
 import discord
-# Importaciones de tus funciones de conexión a la base de datos
+from ...environments.utils import emoji_flags  # Importar desde utils
 from ...environments.connection import create_connection, close_connection
 from ...environments.logging import safe_log
 
@@ -16,33 +16,16 @@ def register_commands(bot):
 
     @bot.slash_command(name="languages", description="Muestra los idiomas disponibles para traducción")
     async def languages(ctx):
-        language_list = "🇬🇧, 🇪🇸, 🇩🇪, 🇷🇺, 🇵🇹, 🇻🇳, 🇨🇳, 🇮🇹, 🇺🇸, 🇵🇱,🇺🇸,🇷🇸,🇯🇵"
+        # Usar los emojis directamente
+        language_list = ', '.join(emoji_flags.keys())
         connection = create_connection()
         if connection:
             safe_log(connection, "INFO", "Comando languages invocado", "languages")
             close_connection(connection)
         await ctx.respond(f"Languages available for translation: {language_list}")
 
-    # Diccionario de opciones de idiomas y sus banderas
-    language_options = {
-    'English': '🇬🇧',
-    'Spanish': '🇪🇸',
-    'German': '🇩🇪',
-    'Russian': '🇷🇺',
-    'Portuguese': '🇵🇹',
-    'Vietnamese': '🇻🇳',
-    'Chinese': '🇨🇳',
-    'Italian': '🇮🇹',
-    'French': '🇫🇷',
-    'Polish': '🇵🇱',
-    'American English': '🇺🇸',
-    'Serbian': '🇷🇸',
-    'Japanese': '🇯🇵',
-    }
-
-
     @bot.slash_command(name="setlanguage", description="Select your language")
-    async def setlanguage(ctx, idioma: discord.Option(str, "Elige tu idioma", choices=[OptionChoice(name=f"{name} {flag}", value=name) for name, flag in language_options.items()])):
+    async def setlanguage(ctx, idioma: discord.Option(str, "Elige tu idioma", choices=[OptionChoice(name=f"{flag} {code.upper()}", value=code) for flag, code in emoji_flags.items()])):
         user_name = ctx.author.name
         connection = create_connection()
         try:
@@ -54,7 +37,7 @@ def register_commands(bot):
                 (user_name, idioma)
             )
             connection.commit()
-            await ctx.respond(f"{ctx.author.mention}, tu idioma se ha establecido a {language_options[idioma]}")
+            await ctx.respond(f"{ctx.author.mention}, tu idioma se ha establecido a {emoji_flags[idioma]}")
             safe_log(connection, "INFO", f"Idioma actualizado para {user_name} a {idioma}", "setlanguage")
         except Exception as e:
             if connection:
@@ -63,5 +46,3 @@ def register_commands(bot):
         finally:
             if connection:
                 close_connection(connection)
-
-
