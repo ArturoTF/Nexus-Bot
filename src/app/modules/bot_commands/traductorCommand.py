@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 from googletrans import Translator
+from discord.commands import slash_command
 from ...environments.utils import get_user_language # Importar desde utils
 from ...environments.logging import safe_log
 
@@ -9,7 +10,7 @@ class TraductorCommands(commands.Cog):
         self.bot = bot
         self.translator = Translator()
 
-    @commands.slash_command(name="translate", description="Traduce el mensaje respondido al idioma establecido o seleccionado.")
+    @slash_command(name="translate", description="Traduce el mensaje respondido al idioma establecido o seleccionado.")
     async def translate(self, ctx, language: discord.Option(str, "Elige un idioma", required=False)):
         # Recuperar el mensaje respondido
         reference = ctx.message.reference
