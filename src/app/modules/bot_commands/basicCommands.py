@@ -36,7 +36,9 @@ def register_commands(bot):
                     (user_name, idioma)
                 )
                 connection.commit()
-                await ctx.respond(f"{ctx.author.mention}, tu idioma se ha establecido a {flag} {code.upper()}")
+                # Obtener la bandera basada en el código de idioma recibido
+                flag = next((f for f, c in emoji_flags.items() if c == idioma), None)
+                await ctx.respond(f"{ctx.author.mention}, tu idioma se ha establecido a {flag if flag else 'Unknown language'}")
                 safe_log(connection, "INFO", f"Idioma actualizado para {user_name} a {idioma}", "setlanguage")
             except mysql.connector.Error as e:
                 safe_log(connection, "ERROR", f"Error en setlanguage: {e}", "setlanguage")
