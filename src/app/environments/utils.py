@@ -1,6 +1,5 @@
 import os
-from app.environments.connection import create_connection,close_connection
-from ...environments.logging import safe_log
+from ..environments.connection import create_connection, close_connection
 
 def get_user_language(user_id):
     """

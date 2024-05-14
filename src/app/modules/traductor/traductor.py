@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 from googletrans import Translator
-from ...environments.utils import emoji_flags  # Importar desde utils
+from ...environments.utils import emoji_flags
 from ...environments.connection import create_connection, close_connection
 from ...environments.logging import safe_log
 
