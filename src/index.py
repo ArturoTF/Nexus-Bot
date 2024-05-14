@@ -1,18 +1,18 @@
 import discord
 import os
-from app.modules.traductor.traductor import bot
-from discord import SlashCommand  # Esto ahora viene de una extensión compatible
-from app.modules.bot_commands.basicCommands import register_commands
-from app.modules.bot_commands.traductorCommand import TraductorCommands  # Importar el nuevo Cog
 from discord.ext import commands
 from app.environments.connection import create_connection, close_connection
 from app.environments.logging import safe_log
 
-# Registra tus comandos slash utilizando la función adaptada a py-cord
-register_commands(bot)
+intents = discord.Intents.default()  # Asegúrate de activar los intents necesarios
+intents.messages = True
+intents.guilds = True
 
-# Añade el nuevo Cog de traducción al bot
-bot.add_cog(TraductorCommands(bot))
+bot = commands.Bot(command_prefix='/', intents=intents)
+
+# Cargar cogs
+bot.load_extension('app.modules.bot_commands.basicCommands')
+bot.load_extension('app.modules.bot_commands.traductorCommand')
 
 @bot.event
 async def on_ready():
@@ -21,6 +21,11 @@ async def on_ready():
         safe_log(connection, "INFO", f"Bot listo como {bot.user.name}", "on_ready")
         close_connection(connection)
     print(f'Bot listo como {bot.user.name}')
+
+@bot.event
+async def on_message(message):
+    # Código para manejar mensajes aquí
+    await bot.process_commands(message)
 
 @bot.event
 async def on_command_error(ctx, error):
