@@ -1,7 +1,8 @@
 import discord
 from discord.ext import commands
 from googletrans import Translator
-from utils import get_user_language
+from ...environments.utils import get_user_language # Importar desde utils
+from ...environments.logging import safe_log
 
 class TraductorCommands(commands.Cog):
     def __init__(self, bot):
