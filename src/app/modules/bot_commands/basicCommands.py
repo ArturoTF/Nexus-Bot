@@ -36,7 +36,7 @@ def register_commands(bot):
                     (user_name, idioma)
                 )
                 connection.commit()
-                await ctx.respond(f"{ctx.author.mention}, tu idioma se ha establecido a {emoji_flags[idioma]}")
+                await ctx.respond(f"{ctx.author.mention}, tu idioma se ha establecido a {flag} {code.upper()}")
                 safe_log(connection, "INFO", f"Idioma actualizado para {user_name} a {idioma}", "setlanguage")
             except mysql.connector.Error as e:
                 safe_log(connection, "ERROR", f"Error en setlanguage: {e}", "setlanguage")
