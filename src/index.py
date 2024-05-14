@@ -3,7 +3,7 @@ import os
 from app.modules.traductor.traductor import bot
 from discord import SlashCommand  # Esto ahora viene de una extensión compatible
 from app.modules.bot_commands.basicCommands import register_commands
-from app.modules.traductor.traductorCommand import TraductorCommands  # Importar el nuevo Cog
+from app.modules.bot_commands.traductorCommand import TraductorCommands  # Importar el nuevo Cog
 from discord.ext import commands
 from app.environments.connection import create_connection, close_connection
 from app.environments.logging import safe_log
