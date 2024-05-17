@@ -1,7 +1,38 @@
-from googletrans import Translator
+import os
+from ..environments.connection import create_connection, close_connection
 
-translator = Translator()
+def get_user_language(user_id):
+    """
+    Recupera el idioma preferido de un usuario basado en su ID.
+    Retorna 'en' si el usuario no ha especificado un idioma.
+    """
+    try:
+        # Crea una conexión a la base de datos
+        connection = create_connection()
+        if connection is not None:
+            cursor = connection.cursor()
+            # Preparar la consulta SQL para obtener el idioma del usuario
+            query = "SELECT idioma FROM usuarios_idioma WHERE user_id = %s"
+            cursor.execute(query, (user_id,))
+            # Obtener el resultado
+            result = cursor.fetchone()
+            cursor.close()
+            # Comprueba si se encontró un idioma y retorna el resultado
+            if result:
+                return result[0]
+            else:
+                return 'en'  # Idioma por defecto si no se encuentra en la base de datos
+        else:
+            return 'en'  # Retorna inglés por defecto si la conexión falla
+    except Exception as e:
+        print(f"Error al obtener el idioma del usuario: {e}")
+        return 'en'  # Retorna inglés por defecto en caso de error
+    finally:
+        # Cierra la conexión a la base de datos
+        if connection:
+            close_connection(connection)
 
+# Diccionario de banderas con códigos de idioma correspondientes
 emoji_flags = {
     '🇬🇧': 'en',  # Inglés
     '🇪🇸': 'es',  # Español
@@ -17,21 +48,3 @@ emoji_flags = {
     '🇷🇸': 'sr',  # Serbio
     '🇯🇵': 'ja',  # Japonés
 }
-
-def get_user_language(user_id, db_connection):
-    cursor = db_connection.cursor()
-    cursor.execute("SELECT language FROM users WHERE user_id = %s", (user_id,))
-    result = cursor.fetchone()
-    if result:
-        return result[0]
-    return 'en'  # Default to English if no language is set
-
-def translate_text(text, dest_language):
-    translated = translator.translate(text, dest=dest_language)
-    return translated.text
-
-def get_available_languages():
-    return translator.LANGUAGES
-
-def get_language_from_emoji(emoji):
-    return emoji_flags.get(emoji, 'en')

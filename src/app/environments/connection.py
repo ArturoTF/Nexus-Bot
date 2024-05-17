@@ -28,11 +28,3 @@ def close_connection(connection):
             print("Conexión a MySQL cerrada")
     except Error as e:
         print(f"Error al cerrar la conexión MySQL: {e}")
-        
-def get_db_connection():
-    return mysql.connector.connect(
-        host='your_host',
-        user='your_user',
-        password='your_password',
-        database='your_database'
-    )
