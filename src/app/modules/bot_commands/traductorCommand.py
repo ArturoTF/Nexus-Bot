@@ -7,7 +7,7 @@ class TraductorCommand(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(name='translate')
+    @slash_command(name='translate')
     async def translate(self, ctx, *, message: str = None):
         db_connection = get_db_connection()
         user_language = get_user_language(ctx.author.id, db_connection)
@@ -22,7 +22,7 @@ class TraductorCommand(commands.Cog):
                     await ctx.send(translated_text)
                     break
 
-    @commands.command(name='translate_to')
+    @slash_command(name='translate_to')
     async def translate_to(self, ctx, lang_or_emoji: str, *, message: str = None):
         available_languages = get_available_languages()
 
