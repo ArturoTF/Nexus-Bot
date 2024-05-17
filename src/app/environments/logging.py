@@ -1,6 +1,11 @@
 import mysql.connector
 from mysql.connector import Error
 
+logging.basicConfig(level=logging.INFO)
+
+def get_logger(name):
+    return logging.getLogger(name)
+
 def log_to_database(connection, level, message, source):
     """ Inserta un registro en la tabla de logs de la base de datos usando la conexión proporcionada. """
     try:
