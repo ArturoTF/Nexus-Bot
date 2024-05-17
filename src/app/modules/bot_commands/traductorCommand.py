@@ -13,7 +13,7 @@ class TraductorCommands(commands.Cog):
     @slash_command(name="translate", description="Traduce un mensaje específico al idioma seleccionado.")
     async def translate(self, interaction: discord.Interaction, 
                         message: Option(str, "Pega aquí el mensaje que quieres traducir"), 
-                        language: Option(str, "Elige un idioma", required=False, default=None)):
+                        language: Option(str, "Elige un idioma", required=False)):
         # Determinar el idioma de destino
         if not language:
             language = await get_user_language(interaction.user.id)
@@ -23,8 +23,8 @@ class TraductorCommands(commands.Cog):
         # Traducir el mensaje
         translated_message = self.translator.translate(message, dest=language).text
         
-        # Enviar el mensaje traducido con el idioma
-        await interaction.response.send_message(f"{translated_message} ({language})")
+        # Enviar el mensaje traducido
+        await interaction.response.send_message(translated_message)
 
 def setup(bot):
     bot.add_cog(TraductorCommands(bot))

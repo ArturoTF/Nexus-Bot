@@ -12,7 +12,7 @@ def get_user_language(user_id):
         if connection is not None:
             cursor = connection.cursor()
             # Preparar la consulta SQL para obtener el idioma del usuario
-            query = "SELECT idioma FROM usuarios_idioma WHERE user_id = %s"
+            query = "SELECT idioma FROM usuarios_idioma WHERE name = %s"
             cursor.execute(query, (user_id,))
             # Obtener el resultado
             result = cursor.fetchone()
@@ -24,13 +24,14 @@ def get_user_language(user_id):
                 return 'en'  # Idioma por defecto si no se encuentra en la base de datos
         else:
             return 'en'  # Retorna inglés por defecto si la conexión falla
-    except Exception as e:
+    except Error as e:
         print(f"Error al obtener el idioma del usuario: {e}")
         return 'en'  # Retorna inglés por defecto en caso de error
     finally:
         # Cierra la conexión a la base de datos
-        if connection:
+        if connection and connection.is_connected():
             close_connection(connection)
+
 
 # Diccionario de banderas con códigos de idioma correspondientes
 emoji_flags = {
