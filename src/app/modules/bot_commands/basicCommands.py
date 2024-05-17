@@ -30,8 +30,9 @@ class BasicCommands(commands.Cog):
     @slash_command(name="setlanguage", description="Select your language")
     async def setlanguage(self, ctx, idioma: Option(str, "Elige tu idioma", choices=[OptionChoice(name=f"{flag} {code.upper()}", value=code) for flag, code in emoji_flags.items()])):
         user_name = ctx.author.name
-        connection = create_connection()
         user_id = ctx.author.id
+        print(user_id)
+        connection = create_connection()      
         if connection:
             try:
                 cursor = connection.cursor()
