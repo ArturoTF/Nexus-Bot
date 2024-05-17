@@ -31,12 +31,13 @@ class BasicCommands(commands.Cog):
     async def setlanguage(self, ctx, idioma: Option(str, "Elige tu idioma", choices=[OptionChoice(name=f"{flag} {code.upper()}", value=code) for flag, code in emoji_flags.items()])):
         user_name = ctx.author.name
         connection = create_connection()
+        user_id = ctx.author.id
         if connection:
             try:
                 cursor = connection.cursor()
                 cursor.execute(
-                    "INSERT INTO usuarios_idioma (name, idioma) VALUES (%s, %s) ON DUPLICATE KEY UPDATE idioma = VALUES(idioma)",
-                    (user_name, idioma)
+                    "INSERT INTO usuarios_idioma (user_id, name, idioma) VALUES (%s, %s, %s) ON DUPLICATE KEY UPDATE idioma = VALUES(idioma)",
+                    (user_id, user_name, idioma)
                 )
                 connection.commit()
                 flag = next((f for f, c in emoji_flags.items() if c == idioma), None)
