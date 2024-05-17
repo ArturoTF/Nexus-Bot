@@ -6,6 +6,7 @@ from ...environments.utils import get_user_language
 from ...environments.connection import create_connection, close_connection
 from ...environments.logging import safe_log
 
+
 class TraductorCommands(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
@@ -14,18 +15,15 @@ class TraductorCommands(commands.Cog):
     @slash_command(name="translate", description="Traduce un mensaje específico al idioma seleccionado.")
     async def translate(self, ctx, message: Option(str, "Pega aquí el mensaje que quieres traducir")):
         user_id = ctx.author.id
-        print(user_id)
-        
         connection = create_connection()
         if connection:
             try:
                 target_language = get_user_language(user_id)
                 if not target_language:
                     target_language = 'en'  # Idioma por defecto si no se encuentra ninguno
-                print(target_language)
+                
                 # Traducir el mensaje
                 translated_message = self.translator.translate(message, dest=target_language).text
-                print(translated_message)
                 await ctx.respond(translated_message)
 
                 # Log de la acción
