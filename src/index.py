@@ -1,18 +1,10 @@
 import discord
 import os
-import logging
 from discord.ext import commands
 from app.environments.connection import create_connection, close_connection
 from app.environments.logging import safe_log
 
-# Configurar el nivel de registro global
-logging.basicConfig(level=logging.ERROR)
-
-# Desactivar logs específicos de Discord.py
-discord_logger = logging.getLogger('discord')
-discord_logger.setLevel(logging.ERROR)
-
-intents = discord.Intents.default()
+intents = discord.Intents.default()  # Asegúrate de activar los intents necesarios
 intents.messages = True
 intents.guilds = True
 
@@ -32,6 +24,7 @@ async def on_ready():
 
 @bot.event
 async def on_message(message):
+    # Código para manejar mensajes aquí
     await bot.process_commands(message)
 
 @bot.event
