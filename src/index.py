@@ -1,9 +1,11 @@
 import discord
 import os
+import sys
 from discord.ext import commands
 from app.environments.connection import create_connection, close_connection
 from app.environments.logging import safe_log
 from app.environments.utils import cargarCogs
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), 'src')))
 
 intents = discord.Intents.default()  # Asegúrate de activar los intents necesarios
 intents.messages = True
