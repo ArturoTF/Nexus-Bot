@@ -1,14 +1,6 @@
 import os
 from ..environments.connection import create_connection, close_connection
 from ..environments.connection import create_connection, close_connection
-from index import bot
-def cargarCogs():
-    bot.load_extension('app.modules.bot_commands.basicCommands')
-    bot.load_extension('app.modules.bot_commands.translatorCommands.setLanguaje')
-    bot.load_extension('app.modules.bot_commands.translatorCommands.translate')
-    bot.load_extension("app.modules.bot_commands.weather")
-    bot.load_extension("app.modules.bot_commands.news")
-    bot.load_extension("app.modules.bot_commands.facts")
 
 def get_user_language(user_id):
     try:
