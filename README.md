@@ -17,6 +17,7 @@ Nexus Bot incluye una variedad de comandos útiles que mejoran la interacción y
 - El bot, en caso de detectar un error, lo notifica en desarrollo (BD).
 - Integración de un comando `/weather [ciudad]`: Permitirá ver la meteorología de una ciudad (temperatura, humedad, velocidad del viento y tiempo).
 - Integración de un comando `/news`: Permitirá ver las ultimas noticias de la BBC.
+- Integración de un comando `/facts`: Permitirá ver datos curiosos.
 
 ## Futuras Actualizaciones
 Estoy trabajando constantemente en nuevas características para Nexus Bot, algunas de las cuales se lanzarán en futuras actualizaciones:
