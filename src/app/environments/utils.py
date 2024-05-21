@@ -1,7 +1,7 @@
 import os
 from ..environments.connection import create_connection, close_connection
 from ..environments.connection import create_connection, close_connection
-from ....src.index import bot
+from src.index import bot
 def cargarCogs():
     bot.load_extension('app.modules.bot_commands.basicCommands')
     bot.load_extension('app.modules.bot_commands.translatorCommands.setLanguaje')
