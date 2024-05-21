@@ -3,6 +3,7 @@ import os
 from discord.ext import commands
 from app.environments.connection import create_connection, close_connection
 from app.environments.logging import safe_log
+from app.environments.utils import cargarCogs
 
 intents = discord.Intents.default()  # Asegúrate de activar los intents necesarios
 intents.messages = True
@@ -11,11 +12,7 @@ intents.guilds = True
 bot = commands.Bot(command_prefix='/', intents=intents)
 
 # Cargar cogs
-bot.load_extension('app.modules.bot_commands.basicCommands')
-bot.load_extension('app.modules.bot_commands.translatorCommands.setLanguaje')
-bot.load_extension('app.modules.bot_commands.translatorCommands.translate')
-bot.load_extension("app.modules.bot_commands.weather")
-bot.load_extension("app.modules.bot_commands.news")
+cargarCogs()
 
 @bot.event
 async def on_ready():
