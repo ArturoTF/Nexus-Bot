@@ -2,11 +2,11 @@ import discord
 from discord.ext import commands
 from googletrans import Translator
 from discord.commands import slash_command, Option
-from ...environments.utils import get_user_language
-from ...environments.connection import create_connection, close_connection
-from ...environments.logging import safe_log
+from ....environments.utils import get_user_language
+from ....environments.connection import create_connection, close_connection
+from ....environments.logging import safe_log
 
-class TraductorCommands(commands.Cog):
+class Translate(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.translator = Translator()
@@ -40,4 +40,4 @@ class TraductorCommands(commands.Cog):
             await ctx.respond("Error al conectar con la base de datos.")
 
 def setup(bot):
-    bot.add_cog(TraductorCommands(bot))
+    bot.add_cog(Translate(bot))

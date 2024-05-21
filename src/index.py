@@ -12,7 +12,8 @@ bot = commands.Bot(command_prefix='/', intents=intents)
 
 # Cargar cogs
 bot.load_extension('app.modules.bot_commands.basicCommands')
-bot.load_extension('app.modules.bot_commands.traductorCommand')
+bot.load_extension('app.modules.bot_commands.translatorCommands.setLanguaje')
+bot.load_extension('app.modules.bot_commands.translatorCommands.translate')
 bot.load_extension("app.modules.bot_commands.weather")
 bot.load_extension("app.modules.bot_commands.news")
 
