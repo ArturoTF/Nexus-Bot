@@ -13,6 +13,7 @@ bot = commands.Bot(command_prefix='/', intents=intents)
 # Cargar cogs
 bot.load_extension('app.modules.bot_commands.basicCommands')
 bot.load_extension('app.modules.bot_commands.traductorCommand')
+bot.load_extension("app.modules.bot_commands.weather")
 
 @bot.event
 async def on_ready():
