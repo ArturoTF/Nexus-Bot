@@ -26,8 +26,12 @@ class Weather(commands.Cog):
             await ctx.respond(embed=embed)
             safe_log(weather_data, "INFO", "Comando weather invocado", "weather")
         else:
-            await ctx.respond(f"Could not retrieve weather data for {city}. Please try again.")
+            await ctx.respond(f"Could not retrieve weather data for {city}. Please try again. You can check the list of available cities here: http://bulk.openweathermap.org/sample/")
             safe_log(weather_data, "ERROR", "Error weather", "weather")
+
+    @slash_command(name="cities", description="Get a link to the list of available cities for /weather")
+    async def cities(self, ctx):
+        await ctx.respond("You can check the list of available cities here: http://bulk.openweathermap.org/sample/")
 
     def get_weather(self, city):
         url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={WEATHER_API_KEY}&units=metric"

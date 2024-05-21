@@ -1,6 +1,5 @@
 import os
 from ..environments.connection import create_connection, close_connection
-
 from ..environments.connection import create_connection, close_connection
 
 def get_user_language(user_id):
