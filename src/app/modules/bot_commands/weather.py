@@ -3,6 +3,7 @@ import requests
 import discord
 from discord.ext import commands
 from discord.commands import slash_command
+from ...environments.logging import safe_log
 
 WEATHER_API_KEY = os.getenv('OPENWEATHERMAP_API_KEY')
 
@@ -23,8 +24,10 @@ class Weather(commands.Cog):
             embed.add_field(name="Humidity", value=f"{weather_data['humidity']}%")
             embed.add_field(name="Wind Speed", value=f"{weather_data['wind_speed']} m/s")
             await ctx.respond(embed=embed)
+            safe_log(weather_data, "INFO", "Comando weather invocado", "weather")
         else:
             await ctx.respond(f"Could not retrieve weather data for {city}. Please try again.")
+            safe_log(weather_data, "ERROR", "Error weather", "weather")
 
     def get_weather(self, city):
         url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={WEATHER_API_KEY}&units=metric"
@@ -39,6 +42,7 @@ class Weather(commands.Cog):
             }
             return weather_info
         else:
+            safe_log("Api", "ERROR", "Error weather, no se ha obtenido la solicitud", "weather")
             return None
 
 def setup(bot):

@@ -14,6 +14,7 @@ bot = commands.Bot(command_prefix='/', intents=intents)
 bot.load_extension('app.modules.bot_commands.basicCommands')
 bot.load_extension('app.modules.bot_commands.traductorCommand')
 bot.load_extension("app.modules.bot_commands.weather")
+bot.load_extension("app.modules.bot_commands.news")
 
 @bot.event
 async def on_ready():
@@ -25,7 +26,6 @@ async def on_ready():
 
 @bot.event
 async def on_message(message):
-    # Código para manejar mensajes aquí
     await bot.process_commands(message)
 
 @bot.event
