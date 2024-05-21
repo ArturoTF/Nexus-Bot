@@ -4,8 +4,9 @@ import sys
 from discord.ext import commands
 from app.environments.connection import create_connection, close_connection
 from app.environments.logging import safe_log
-# from app.environments.utils import cargarCogs
-from app.bot_config import bot, cargarCogs
+from app.bot_config import bot, cargarModulos
+
+cargarModulos()
 
 @bot.event
 async def on_ready():

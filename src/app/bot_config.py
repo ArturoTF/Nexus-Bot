@@ -8,7 +8,7 @@ intents.guilds = True
 bot = commands.Bot(command_prefix='/', intents=intents)
 
 
-def cargarCogs():
+def cargarModulos():
     bot.load_extension('app.modules.bot_commands.basicCommands')
     bot.load_extension('app.modules.bot_commands.translatorCommands.setLanguaje')
     bot.load_extension('app.modules.bot_commands.translatorCommands.translate')
