@@ -4,7 +4,7 @@ from googletrans import Translator
 from discord.commands import slash_command, Option, OptionChoice
 import mysql.connector
 import os
-from ....environments.utils import get_user_language
+from ....environments.utils import emoji_flags
 from ....environments.connection import create_connection, close_connection
 from ....environments.logging import safe_log
 
