@@ -44,11 +44,14 @@ class BasicCommands(commands.Cog):
             
     @slash_command(name="help", description="Muestra la lista de comandos")
     async def help(self, ctx):
-        help_message = (
-            "```"
-            "# **Nexus Bot Helper**\n\n"
-            "[] = required argument, <> = optional argument\n\n"
-            "**Commands**\n"
+        embed = discord.Embed(
+            title="Nexus Bot Helper",
+            description="[] = required argument, <> = optional argument",
+            color=discord.Color.blue()
+        )
+        
+        # Sección Commands
+        commands_list = (
             "- /version\n"
             "- /ceo\n"
             "- /languages\n"
@@ -59,12 +62,18 @@ class BasicCommands(commands.Cog):
             "- /news\n"
             "- /cities\n"
             "- /weather [city]\n"
-            "**Utilities**\n"
-            "- You can translate a message from someone else by reacting to the message with the flag that you want to translate the message.\n" 
-            "  Available languages ​​/languages\n"
-            "```"
         )
-        await ctx.respond(help_message)
+        
+        # Sección Utilities
+        utilities_list = (
+            "- You can translate a message from someone else by reacting to the message with the flag that you want to translate the message.\n"
+            "  Available languages ​​/languages\n"
+        )
+        
+        embed.add_field(name="**Commands**", value=commands_list, inline=False)
+        embed.add_field(name="**Utilities**", value=utilities_list, inline=False)
+        
+        await ctx.respond(embed=embed)
 
 def setup(bot):
     bot.add_cog(BasicCommands(bot))
