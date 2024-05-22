@@ -42,5 +42,6 @@ class setLanguaje(commands.Cog):
         else:
             await ctx.respond("No se pudo conectar a la base de datos")
 
+
 def setup(bot):
     bot.add_cog(setLanguaje(bot))
