@@ -41,6 +41,30 @@ class BasicCommands(commands.Cog):
             await ctx.respond("No se pudo encontrar la versión en setup.py")
         except Exception as e:
             await ctx.respond(f"Error al leer setup.py: {e}")
+            
+    @slash_command(name="help", description="Muestra la lista de comandos")
+    async def help(self, ctx):
+        help_message = (
+            "```"
+            "# **Nexus Bot Helper**\n\n"
+            "[] = required argument, <> = optional argument\n\n"
+            "**Commands**\n"
+            "- /version\n"
+            "- /ceo\n"
+            "- /languages\n"
+            "- /setLanguage [language]\n"
+            "- /translate [message]\n"
+            "- /list_topics\n"
+            "- /facts [one topic]\n"
+            "- /news\n"
+            "- /cities\n"
+            "- /weather [city]\n"
+            "**Utilities**\n"
+            "- You can translate a message from someone else by reacting to the message with the flag that you want to translate the message.\n" 
+            "  Available languages ​​/languages\n"
+            "```"
+        )
+        await ctx.respond(help_message)
 
 def setup(bot):
     bot.add_cog(BasicCommands(bot))
