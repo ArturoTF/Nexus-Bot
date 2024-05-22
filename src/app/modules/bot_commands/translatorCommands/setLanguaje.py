@@ -30,7 +30,8 @@ class setLanguaje(commands.Cog):
                            ON DUPLICATE KEY UPDATE idioma = VALUES(idioma)"""
                 cursor.execute(query, (user_id, username, idioma))
                 connection.commit()
-                await ctx.respond(f"Idioma establecido a {idioma}")
+                flag = next((f for f, c in emoji_flags.items() if c == idioma), None)
+                await ctx.respond(f"{ctx.author.mention}, tu idioma se ha establecido a {flag if flag else 'Unknown language'}")
                 safe_log(connection, "INFO", f"Idioma de usuario {username} establecido a {idioma}", "setlanguage")
             except mysql.connector.Error as err:
                 await ctx.respond(f"Error al establecer el idioma: {err}")
