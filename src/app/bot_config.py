@@ -15,5 +15,3 @@ def cargarModulos():
     bot.load_extension("app.modules.bot_commands.weather")
     bot.load_extension("app.modules.bot_commands.news")
     bot.load_extension("app.modules.bot_commands.facts")
-    bot.load_extension("app.modules.traductor.traductor")
-
