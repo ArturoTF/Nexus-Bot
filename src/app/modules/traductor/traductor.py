@@ -26,7 +26,18 @@ class Traductor(commands.Cog):
             connection = create_connection()
             try:
                 original_message = reaction.message.content
-                translated_text = translator.translate(original_message, src='auto', dest=lang_code).text
+                if original_message is None:
+                    raise ValueError("Mensaje original es None")
+                
+                safe_log(connection, "INFO", f"Mensaje original: {original_message}", "on_reaction_add")
+                
+                translation_result = translator.translate(original_message, src='auto', dest=lang_code)
+                if translation_result is None or translation_result.text is None:
+                    raise ValueError("Resultado de la traducción es None")
+                
+                translated_text = translation_result.text
+                safe_log(connection, "INFO", f"Texto traducido: {translated_text}", "on_reaction_add")
+                
                 await reaction.message.channel.send(f"{reaction.emoji} -> {translated_text}")
                 if connection:
                     safe_log(connection, "INFO", f"Mensaje traducido a {lang_code}: {translated_text}", "on_reaction_add")
