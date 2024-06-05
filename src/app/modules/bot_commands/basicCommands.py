@@ -50,7 +50,6 @@ class BasicCommands(commands.Cog):
             color=discord.Color.blue()
         )
         
-        # Sección Commands
         commands_list = (
             "- /version\n"
             "- /ceo\n"
@@ -64,7 +63,6 @@ class BasicCommands(commands.Cog):
             "- /weather [city]\n"
         )
         
-        # Sección Utilities
         utilities_list = (
             "- You can translate a message from someone else by reacting to the message with the flag that you want to translate the message.\n"
             "  Available languages ​​/languages\n"

@@ -21,14 +21,12 @@ class Translate(commands.Cog):
             try:
                 target_language = get_user_language(user_id)
                 if not target_language:
-                    target_language = 'en'  # Idioma por defecto si no se encuentra ninguno
+                    target_language = 'en' 
                 print(target_language)
-                # Traducir el mensaje
                 translated_message = self.translator.translate(message, dest=target_language).text
                 print(translated_message)
                 await ctx.respond(translated_message)
 
-                # Log de la acción
                 safe_log(connection, "INFO", f"Mensaje traducido a {target_language}: {translated_message}", "translate")
                 
             except Exception as e:

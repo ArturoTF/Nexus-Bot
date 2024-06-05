@@ -21,7 +21,7 @@ class News(commands.Cog):
                 description="Here are the top news headlines:",
                 color=discord.Color.blue()
             )
-            for article in news_data[:5]:  # Limit to top 5 articles
+            for article in news_data[:5]:
                 embed.add_field(
                     name=article['title'],
                     value=f"[Read more]({article['url']})",

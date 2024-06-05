@@ -2,7 +2,6 @@ import os
 import mysql.connector
 from mysql.connector import Error
 
-# Función para crear una conexión a la base de datos
 def create_connection():
     try:
         connection = mysql.connector.connect(

@@ -15,7 +15,7 @@ def get_user_language(user_id):
             if result:
                 return result[0]
             else:
-                return 'en'  # Idioma por defecto si no se encuentra en la base de datos
+                return 'en'
         else:
             return 'en'
     except Error as e:
@@ -27,7 +27,7 @@ def get_user_language(user_id):
 
 
 
-# Diccionario de banderas con códigos de idioma correspondientes
+# Diccionario de banderas con códigos de idioma correspondientes -> banderaDiscord : valor. Puedo añadir todos los que quiera
 emoji_flags = {
     '🇬🇧': 'en',  # Inglés
     '🇪🇸': 'es',  # Español
