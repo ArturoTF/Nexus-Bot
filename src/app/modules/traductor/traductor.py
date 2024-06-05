@@ -10,7 +10,6 @@ intents = discord.Intents.default()
 intents.reactions = True
 intents.messages = True
 intents.guilds = True
-intents.message_content = True
 
 bot = commands.Bot(command_prefix='/', intents=intents)
 translator = Translator()
