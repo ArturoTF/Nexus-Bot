@@ -4,11 +4,11 @@ from googletrans import Translator
 from ...environments.utils import emoji_flags
 from ...environments.connection import create_connection, close_connection
 from ...environments.logging import safe_log
+from ...bot_config import bot
 
 intents = discord.Intents.all()
 intents.reactions = True
 
-bot = commands.Bot(command_prefix='/', intents=intents)
 translator = Translator()
 
 @bot.event

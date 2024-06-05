@@ -5,7 +5,7 @@ from discord.ext import commands
 from app.environments.connection import create_connection, close_connection
 from app.environments.logging import safe_log
 from app.bot_config import bot, cargarModulos
-
+from app.modules.traductor.traductor import on_reaction_add
 cargarModulos()
 
 @bot.event

@@ -1,9 +1,11 @@
 import discord
 from discord.ext import commands
 
-intents = discord.Intents.default()
+intents = discord.Intents.all()
+intents.reactions = True
 intents.messages = True
 intents.guilds = True
+intents.message_content = True
 
 bot = commands.Bot(command_prefix='/', intents=intents)
 
