@@ -11,25 +11,32 @@ intents.reactions = True
 bot = commands.Bot(command_prefix='/', intents=intents)
 translator = Translator()
 
-@bot.event
-async def on_reaction_add(reaction, user):
-    if user.bot:
-        return
+class Traductor(commands.Cog):
+    def __init__(self, bot):
+        self.bot = bot
 
-    lang_code = emoji_flags.get(str(reaction.emoji))
+    @commands.Cog.listener()
+    async def on_reaction_add(self, reaction, user):
+        if user.bot:
+            return
 
-    if lang_code is not None:
-        connection = create_connection()
-        try:
-            original_message = reaction.message.content
-            translated_text = translator.translate(original_message, src='auto', dest=lang_code).text
-            await reaction.message.channel.send(f"{reaction.emoji} -> {translated_text}")
-            if connection:
-                safe_log(connection, "INFO", f"Mensaje traducido a {lang_code}: {translated_text}", "on_reaction_add")
-        except Exception as e:
-            if connection:
-                safe_log(connection, "ERROR", f"Error al traducir mensaje: {e}", "on_reaction_add")
-            await reaction.message.channel.send("Error al traducir el mensaje.")
-        finally:
-            if connection:
-                close_connection(connection)
+        lang_code = emoji_flags.get(str(reaction.emoji))
+
+        if lang_code is not None:
+            connection = create_connection()
+            try:
+                original_message = reaction.message.content
+                translated_text = translator.translate(original_message, src='auto', dest=lang_code).text
+                await reaction.message.channel.send(f"{reaction.emoji} -> {translated_text}")
+                if connection:
+                    safe_log(connection, "INFO", f"Mensaje traducido a {lang_code}: {translated_text}", "on_reaction_add")
+            except Exception as e:
+                if connection:
+                    safe_log(connection, "ERROR", f"Error al traducir mensaje: {e}", "on_reaction_add")
+                await reaction.message.channel.send("Error al traducir el mensaje.")
+            finally:
+                if connection:
+                    close_connection(connection)
+
+def setup(bot):
+    bot.add_cog(Traductor(bot))
