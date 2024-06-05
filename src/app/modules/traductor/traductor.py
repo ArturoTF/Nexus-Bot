@@ -20,6 +20,7 @@ class Traductor(commands.Cog):
         if user.bot:
             return
 
+        # Obtener el código de idioma correcto desde emoji_flags
         lang_code = emoji_flags.get(str(reaction.emoji))
 
         if lang_code is not None:
@@ -30,6 +31,9 @@ class Traductor(commands.Cog):
                     raise ValueError("El mensaje original está vacío o es None")
 
                 safe_log(connection, "INFO", f"Mensaje original: {original_message}", "on_reaction_add")
+                
+                # Asegurarse de que lang_code sea el código de idioma correcto
+                safe_log(connection, "INFO", f"Código de idioma detectado: {lang_code}", "on_reaction_add")
                 
                 translation_result = translator.translate(original_message, src='auto', dest=lang_code)
                 if not translation_result or not translation_result.text:
