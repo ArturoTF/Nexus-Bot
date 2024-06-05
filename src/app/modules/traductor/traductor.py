@@ -26,15 +26,15 @@ class Traductor(commands.Cog):
             connection = create_connection()
             try:
                 original_message = reaction.message.content
-                if not original_message:
-                    raise ValueError("El mensaje original está vacío o es None")
-
+                if original_message is None:
+                    raise ValueError("Mensaje original es None")
+                
                 safe_log(connection, "INFO", f"Mensaje original: {original_message}", "on_reaction_add")
                 
                 translation_result = translator.translate(original_message, src='auto', dest=lang_code)
-                if not translation_result or not translation_result.text:
-                    raise ValueError("El resultado de la traducción es vacío o None")
-
+                if translation_result is None or translation_result.text is None:
+                    raise ValueError("Resultado de la traducción es None")
+                
                 translated_text = translation_result.text
                 safe_log(connection, "INFO", f"Texto traducido: {translated_text}", "on_reaction_add")
                 
@@ -48,8 +48,6 @@ class Traductor(commands.Cog):
             finally:
                 if connection:
                     close_connection(connection)
-        else:
-            await reaction.message.channel.send("El emoji no está asociado a ningún código de idioma.")
 
 def setup(bot):
     bot.add_cog(Traductor(bot))
