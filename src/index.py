@@ -15,10 +15,6 @@ async def on_ready():
         safe_log(connection, "INFO", f"Bot listo como {bot.user.name}", "on_ready")
         close_connection(connection)
     print(f'Bot listo como {bot.user.name}')
-    for guild in bot.guilds:
-        for channel in guild.text_channels:
-            permissions = channel.permissions_for(guild.me)
-            print(f"Permisos en {channel.name}: {permissions}")
 
 @bot.event
 async def on_message(message):
