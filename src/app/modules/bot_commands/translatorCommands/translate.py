@@ -27,7 +27,7 @@ class Translate(commands.Cog):
                 print(translated_message)
                 await ctx.respond(translated_message)
 
-                safe_log(connection, "INFO", f"Mensaje traducido a {target_language}: {translated_message}", "translate")
+                # safe_log(connection, "INFO", f"Mensaje traducido a {target_language}: {translated_message}", "translate")
                 
             except Exception as e:
                 safe_log(connection, "ERROR", f"Error en translate: {e}", "translate")

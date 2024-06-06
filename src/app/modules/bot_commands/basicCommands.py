@@ -16,7 +16,7 @@ class BasicCommands(commands.Cog):
     async def ceo(self, ctx):
         connection = create_connection()
         if connection:
-            safe_log(connection, "INFO", "Comando CEO invocado", "ceo")
+            # safe_log(connection, "INFO", "Comando CEO invocado", "ceo")
             close_connection(connection)
         await ctx.respond("The CEO of this project is ArturoTF")
 
@@ -25,7 +25,7 @@ class BasicCommands(commands.Cog):
         language_list = ', '.join(emoji_flags.keys())
         connection = create_connection()
         if connection:
-            safe_log(connection, "INFO", "Comando languages invocado", "languages")
+            # safe_log(connection, "INFO", "Comando languages invocado", "languages")
             close_connection(connection)
         await ctx.respond(f"Languages available for translation: {language_list}")
 

@@ -32,7 +32,7 @@ class setLanguaje(commands.Cog):
                 connection.commit()
                 flag = next((f for f, c in emoji_flags.items() if c == idioma), None)
                 await ctx.respond(f"{ctx.author.mention}, tu idioma se ha establecido a {flag if flag else 'Unknown language'}")
-                safe_log(connection, "INFO", f"Idioma de usuario {username} establecido a {idioma}", "setlanguage")
+                # safe_log(connection, "INFO", f"Idioma de usuario {username} establecido a {idioma}", "setlanguage")
             except mysql.connector.Error as err:
                 await ctx.respond(f"Error al establecer el idioma: {err}")
                 safe_log(connection, "ERROR", f"Error al establecer idioma para {username}: {err}", "setlanguage")

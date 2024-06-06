@@ -24,7 +24,7 @@ class Weather(commands.Cog):
             embed.add_field(name="Humidity", value=f"{weather_data['humidity']}%")
             embed.add_field(name="Wind Speed", value=f"{weather_data['wind_speed']} m/s")
             await ctx.respond(embed=embed)
-            safe_log(weather_data, "INFO", "Comando weather invocado", "weather")
+            # safe_log(weather_data, "INFO", "Comando weather invocado", "weather")
         else:
             await ctx.respond(f"Could not retrieve weather data for {city}. Please try again. You can check the list of available cities here: http://bulk.openweathermap.org/sample/")
             safe_log(weather_data, "ERROR", "Error weather", "weather")

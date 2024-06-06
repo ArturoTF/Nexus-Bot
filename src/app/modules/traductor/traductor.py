@@ -29,7 +29,7 @@ async def on_reaction_add(reaction, user):
         except Exception as e:
             if connection:
                 safe_log(connection, "ERROR", f"Error al traducir mensaje: {e}", "on_reaction_add")
-            await reaction.message.channel.send("Error al traducir el mensaje.")
+            await reaction.message.channel.send("Error al traducir el mensaje. Tienes un lenguaje establecido? /setlanguage")
         finally:
             if connection:
                 close_connection(connection)

@@ -28,7 +28,7 @@ class News(commands.Cog):
                     inline=False
                 )
             await ctx.respond(embed=embed)
-            safe_log(news_data, "INFO", "Comando news invocado", "news")
+            # safe_log(news_data, "INFO", "Comando news invocado", "news")
         else:
             await ctx.respond("Could not retrieve news. Please try again later.")
             safe_log(news_data, "ERROR", "error en news", "news")
