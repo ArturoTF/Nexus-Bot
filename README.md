@@ -13,7 +13,7 @@ Nexus Bot incluye una variedad de comandos útiles que mejoran la interacción y
 - `/languages` - Muestra todos los idiomas disponibles.
 - `/ceo` - Muestra el CEO del proyecto.
 - `/version` - Muestra la version del proyecto.
-- `/translate [?idioma]` - Al responder un mensaje con este comando, si pones /translate traducirá al lenguaje que tengas en `/setLenguaje`, default ingles. Si pones `/translate [unIdioma]` este traducirá al idioma indicado. El command slash te dara una lista de idiomas que podras introducir aunque con el comando `/languages` puedes verlos tambien.
+- `/translate [mensaje]` - Si pones /translate traducirá al lenguaje que tengas en `/setLenguaje`.
 - El bot puede traducir con emoticonos de bandera reaccionando a un mensaje
 - El bot, en caso de detectar un error, lo notifica en desarrollo (BD).
 - Integración de un comando `/weather [ciudad]`: Permitirá ver la meteorología de una ciudad (temperatura, humedad, velocidad del viento y tiempo) para ver ciudades    disponibles `/cities`.
