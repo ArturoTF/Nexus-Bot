@@ -31,7 +31,7 @@ class Translate(commands.Cog):
                 
             except Exception as e:
                 safe_log(connection, "ERROR", f"Error en translate: {e}", "translate")
-                await ctx.respond("Error al traducir el mensaje.")
+                await ctx.respond("Error al traducir el mensaje.  Tienes un lenguaje establecido? /setlanguage")
             finally:
                 close_connection(connection)
         else:

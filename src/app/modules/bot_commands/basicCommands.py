@@ -8,6 +8,8 @@ from ...environments.utils import emoji_flags
 from ...environments.connection import create_connection, close_connection
 from ...environments.logging import safe_log
 
+version = "Version 1.0.0"
+
 class BasicCommands(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
@@ -29,18 +31,66 @@ class BasicCommands(commands.Cog):
             close_connection(connection)
         await ctx.respond(f"Languages available for translation: {language_list}")
 
-    @slash_command(name="version", description="Muestra la versión del bot")
+    @slash_command(name="version", description="Shows the bot's version")
     async def version(self, ctx):
-        try:
-            with open("setup.py", "r") as f:
-                for line in f:
-                    if line.startswith("version="):
-                        version = line.split("=")[1].strip().strip('"').strip("'")
-                        await ctx.respond(f"La versión del bot es: {version}")
-                        return
-            await ctx.respond("No se pudo encontrar la versión en setup.py")
-        except Exception as e:
-            await ctx.respond(f"Error al leer setup.py: {e}")
+        embed = discord.Embed(
+            title="NEXUS BOT",
+            description=f"**Version:** {version}\n\n**Features:**",
+            color=discord.Color.blue()
+        )
+        
+        embed.add_field(
+            name="/setLanguage",
+            value="Allows you to set your primary language.",
+            inline=False
+        )
+        embed.add_field(
+            name="/languages",
+            value="Shows all available languages.",
+            inline=False
+        )
+        embed.add_field(
+            name="/ceo",
+            value="Displays the project CEO.",
+            inline=False
+        )
+        embed.add_field(
+            name="/version",
+            value="Shows the project version.",
+            inline=False
+        )
+        embed.add_field(
+            name="/translate [message]",
+            value="Translates a message to your /setlanguage.",
+            inline=False
+        )
+        embed.add_field(
+            name="Emoji-based Translation",
+            value="Translates messages when reacting with flag emojis.",
+            inline=False
+        )
+        embed.add_field(
+            name="Error Notification",
+            value="Notifies errors during development (DB).",
+            inline=False
+        )
+        embed.add_field(
+            name="/weather [city]",
+            value="Shows the weather for a city (temperature, humidity, wind speed, weather). Use /cities for available cities.",
+            inline=False
+        )
+        embed.add_field(
+            name="/news",
+            value="Shows the latest news from BBC.",
+            inline=False
+        )
+        embed.add_field(
+            name="/facts",
+            value="Shows interesting facts.",
+            inline=False
+        )
+
+        await ctx.respond(embed=embed)
             
     @slash_command(name="help", description="Muestra la lista de comandos")
     async def help(self, ctx):
