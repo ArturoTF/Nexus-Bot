@@ -34,7 +34,7 @@ Si estás interesado en contribuir al proyecto Nexus Bot, por favor revisa los i
 ## Licencia
 Este proyecto está licenciado bajo la Licencia MIT. Para más detalles, ver el archivo LICENSE en este repositorio.
 
----
+----
 
 Hecho por [ArturoTF](mailto:arturotroyano@gmail.com)
 
